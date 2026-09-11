@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>MailTrace AI | SIH26106</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+    <div class="background-grid"></div>
+
+    <header class="navbar">
+      <a href="/" class="brand">
+        <span class="brand-icon">✦</span>
+
+        <span>
+          <strong>MailTrace AI</strong>
+          <small>EMAIL FORENSIC INTELLIGENCE</small>
+        </span>
+      </a>
+
+      <div class="nav-right">
+        <span class="online-status">
+          <i></i>
+          System Online
+        </span>
+
+        <span class="problem-badge">SIH26106</span>
+      </div>
+    </header>
+
+    <main class="main-container">
+      <section class="hero glass">
+        <div class="hero-text">
+          <span class="eyebrow">AI-POWERED THREAT INVESTIGATION</span>
+
+          <h1>
+            Detect suspicious emails.<br /><span>Trace the evidence.</span>
+          </h1>
+
+          <p>
+            Upload an <strong>.eml</strong> file to analyze headers, URLs,
+            attachments, email authentication, phishing indicators, and forensic
+            evidence in one dashboard.
+          </p>
+
+          <div class="hero-tags">
+            <span>✉ Email Analysis</span>
+            <span>◈ Threat Scoring</span>
+            <span>⌁ Header Forensics</span>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="orbital orbit-one"></div>
+          <div class="orbital orbit-two"></div>
+
+          <div class="hero-shield">
+            <span>🛡</span>
+          </div>
+
+          <div class="floating-card card-email">
+            <span>✉</span>
+            <div>
+              <small>EMAIL STATUS</small>
+              <strong>ANALYZED</strong>
+            </div>
+          </div>
+
+          <div class="floating-card card-threat">
+            <span>!</span>
+            <div>
+              <small>THREAT ENGINE</small>
+              <strong>ACTIVE</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="upload-section glass">
+        <div class="section-title">
+          <div>
+            <span class="step-label">STEP 01</span>
+            <h2>Upload Email Evidence</h2>
+            <p>Choose a raw email file in <code>.eml</code> format.</p>
+          </div>
+
+          <span class="hash-badge">SHA-256 INTEGRITY CHECK</span>
+        </div>
+
+        <form id="uploadForm">
+          <label for="emailFile" class="drop-zone">
+            <input
+              id="emailFile"
+              name="email_file"
+              type="file"
+              accept=".eml"
+              required
+            />
+
+            <span class="upload-circle">↑</span>
+            <strong>Drop your email file here</strong>
+            <small>or click to browse from your device</small>
+            <em>Only .eml files are accepted</em>
+          </label>
+
+          <p id="selectedFile" class="selected-file">
+            No email evidence selected
+          </p>
+
+          <button id="analyzeButton" type="submit" class="primary-button">
+            <span>Start Forensic Analysis</span>
+            <b>→</b>
+          </button>
+        </form>
+
+        <p id="status" class="status-message"></p>
+      </section>
+
+      <section id="loading" class="loading glass hidden">
+        <div class="pulse-loader">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+
+        <div>
+          <h3>Processing email evidence...</h3>
+          <p>
+            Extracting headers, authentication records, links, IP addresses,
+            attachments, and phishing indicators.
+          </p>
+        </div>
+      </section>
+
+      <section id="results" class="results hidden">
+        <div class="dashboard-heading">
+          <div>
+            <span class="eyebrow">FORENSIC CASE RESULT</span>
+            <h2>Threat Investigation Dashboard</h2>
+            <p id="analysisTime">Analysis time: —</p>
+          </div>
+
+          <div class="case-card glass">
+            <small>CASE ID</small>
+            <strong id="caseId">—</strong>
+          </div>
+        </div>
+
+        <section class="overview-grid">
+          <article class="overview-card glass danger-card">
+            <span class="overview-label">THREAT CATEGORY</span>
+            <h3 id="threatCategory">—</h3>
+            <span id="threatBadge" class="risk-badge">WAITING</span>
+          </article>
+
+          <article class="overview-card glass score-overview">
+            <span class="overview-label">RISK SCORE</span>
+
+            <div class="score-layout">
+              <div class="risk-ring">
+                <svg viewBox="0 0 120 120">
+                  <circle class="ring-base" cx="60" cy="60" r="50"></circle>
+                  <circle
+                    id="riskCircle"
+                    class="ring-progress"
+                    cx="60"
+                    cy="60"
+                    r="50"
+                  ></circle>
+                </svg>
+
+                <div class="score-number">
+                  <strong id="riskScore">0</strong>
+                  <small>/100</small>
+                </div>
+              </div>
+
+              <p>
+                Calculated from content, sender identity, URLs, attachments, and
+                authentication results.
+              </p>
+            </div>
+          </article>
+
+          <article class="overview-card glass">
+            <span class="overview-label">CONFIDENCE LEVEL</span>
+            <h3 id="confidence">—</h3>
+            <p>Confidence based on available indicators and header evidence.</p>
+          </article>
+
+          <article class="overview-card glass action-overview">
+            <span class="overview-label">RECOMMENDED ACTION</span>
+            <h3 id="recommendedAction">—</h3>
+          </article>
+        </section>
+
+        <section class="analysis-grid">
+          <article class="glass analysis-card identity-card">
+            <div class="card-heading">
+              <div>
+                <span class="step-label">STEP 02</span>
+                <h3>Sender Identity</h3>
+              </div>
+
+              <span class="heading-icon">✉</span>
+            </div>
+
+            <div class="info-list">
+              <div>
+                <span>FROM</span>
+                <strong id="from">—</strong>
+              </div>
+
+              <div>
+                <span>REPLY-TO</span>
+                <strong id="replyTo">—</strong>
+              </div>
+
+              <div>
+                <span>RETURN-PATH</span>
+                <strong id="returnPath">—</strong>
+              </div>
+
+              <div>
+                <span>SUBJECT</span>
+                <strong id="subject">—</strong>
+              </div>
+
+              <div>
+                <span>DATE</span>
+                <strong id="emailDate">—</strong>
+              </div>
+
+              <div>
+                <span>MESSAGE-ID</span>
+                <strong id="messageId">—</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="glass analysis-card authentication-card">
+            <div class="card-heading">
+              <div>
+                <span class="step-label">STEP 03</span>
+                <h3>Authentication Check</h3>
+              </div>
+
+              <span class="heading-icon">✓</span>
+            </div>
+
+            <div class="authentication-statuses">
+              <div class="auth-status">
+                <span>SPF</span>
+                <strong id="spfStatus" class="neutral-text">UNKNOWN</strong>
+              </div>
+
+              <div class="auth-status">
+                <span>DKIM</span>
+                <strong id="dkimStatus" class="neutral-text">UNKNOWN</strong>
+              </div>
+
+              <div class="auth-status">
+                <span>DMARC</span>
+                <strong id="dmarcStatus" class="neutral-text">UNKNOWN</strong>
+              </div>
+            </div>
+
+            <div class="raw-data">
+              <span>AUTHENTICATION-RESULTS HEADER</span>
+              <pre id="authResults">No authentication record available.</pre>
+            </div>
+          </article>
+
+          <article class="glass analysis-card">
+            <div class="card-heading">
+              <div>
+                <span class="step-label">STEP 04</span>
+                <h3>Risk Indicators</h3>
+              </div>
+
+              <span class="heading-icon warning">!</span>
+            </div>
+
+            <ul id="riskReasons" class="data-list"></ul>
+          </article>
+
+          <article class="glass analysis-card">
+            <div class="card-heading">
+              <div>
+                <span class="step-label">STEP 05</span>
+                <h3>Indicators of Compromise</h3>
+              </div>
+
+              <span class="heading-icon">⌘</span>
+            </div>
+
+            <div class="ioc-group">
+              <span>URLS FOUND</span>
+              <ul id="urls" class="data-list small-list"></ul>
+            </div>
+
+            <div class="ioc-group">
+              <span>IP ADDRESSES FOUND</span>
+              <ul id="ips" class="data-list small-list"></ul>
+            </div>
+
+            <div class="ioc-group">
+              <span>ATTACHMENTS</span>
+              <ul id="attachments" class="data-list small-list"></ul>
+            </div>
+          </article>
+
+          <article class="glass analysis-card full-card">
+            <div class="card-heading">
+              <div>
+                <span class="step-label">STEP 06</span>
+                <h3>SMTP Relay Path</h3>
+                <p>
+                  Mail-server path reconstructed from the
+                  <code>Received</code> headers.
+                </p>
+              </div>
+
+              <span class="heading-icon">⌁</span>
+            </div>
+
+            <div id="relayPath" class="relay-path"></div>
+          </article>
+
+          <article class="glass analysis-card full-card">
+            <div class="card-heading">
+              <div>
+                <span class="step-label">STEP 07</span>
+                <h3>Message Body Preview</h3>
+              </div>
+
+              <span class="heading-icon">≡</span>
+            </div>
+
+            <pre id="bodyPreview" class="email-preview">
+No readable email body was found.
+          </pre>
+          </article>
+
+          <article class="glass analysis-card full-card evidence-card">
+            <div class="card-heading">
+              <div>
+                <span class="step-label">STEP 08</span>
+                <h3>Evidence Integrity</h3>
+                <p>
+                  File integrity is preserved with a SHA-256 digital
+                  fingerprint.
+                </p>
+              </div>
+
+              <span class="heading-icon">#</span>
+            </div>
+
+            <div class="evidence-details">
+              <div>
+                <span>ORIGINAL FILE</span>
+                <strong id="originalFilename">—</strong>
+              </div>
+
+              <div>
+                <span>SHA-256 HASH</span>
+                <strong id="hash">—</strong>
+              </div>
+            </div>
+
+            <a id="downloadReport" href="#" class="download-button">
+              <span>Download Forensic JSON Report</span>
+              <b>↓</b>
+            </a>
+          </article>
+        </section>
+        <!-- NEW: IP Geolocation Section starts here -->
+        <section class="glass analysis-card full-card">
+          <div class="card-heading">
+            <div>
+              <span class="step-label">STEP 09</span>
+              <h3>IP Geolocation</h3>
+              <p>
+                Approximate location of IP addresses found in email headers.
+              </p>
+            </div>
+            <span class="heading-icon">🌍</span>
+          </div>
+
+          <div class="ioc-group">
+            <span>EXTRACTED IPs</span>
+            <textarea
+              id="ips"
+              rows="4"
+              readonly
+              style="
+                width: 100%;
+                background: #0b1220;
+                color: #e8eaed;
+                border: 1px solid #2a3b55;
+                border-radius: 6px;
+                padding: 8px;
+                font-family: monospace;
+              "
+            >
+            </textarea>
+            <br /><br />
+            <button id="showOnMapBtn" class="primary-button" type="button">
+              <span>Show on Map</span>
+              <b>→</b>
+            </button>
+          </div>
+
+          <div
+            id="map"
+            style="
+              height: 500px;
+              width: 100%;
+              margin-top: 15px;
+              border-radius: 8px;
+            "
+          ></div>
+          <div class="ioc-group" style="margin-top: 15px">
+            <span>GEOLOCATION JSON</span>
+            <pre
+              id="geoJsonOutput"
+              style="
+                width: 100%;
+                max-height: 300px;
+                overflow: auto;
+                background: #0b1220;
+                color: #e8eaed;
+                border: 1px solid #2a3b55;
+                border-radius: 6px;
+                padding: 8px;
+                font-family: monospace;
+                white-space: pre-wrap;
+                word-break: break-all;
+              "
+            >
+No data yet.</pre>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <span>MAILTRACE AI</span>
+      <span>SIH26106 • BLOCKCHAIN & CYBERSECURITY</span>
+      <span>DEMO PROTOTYPE</span>
+    </footer>
+    <!-- Leaflet for map -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+      // Create map once
+      const map = L.map("map").setView([20, 0], 2);
+      L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+          maxZoom: 19,
+        },
+      ).addTo(map);
+
+      let markers = [];
+
+      document
+        .getElementById("showOnMapBtn")
+        .addEventListener("click", function () {
+          const text = document.getElementById("ips").value;
+          const ips = text
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+
+          if (!ips.length) {
+            alert("No IPs to geolocate.");
+            return;
+          }
+
+          fetch("/geolocate_ips", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(ips),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              // Clear old markers
+              markers.forEach((m) => map.removeLayer(m));
+              markers = [];
+
+              document.getElementById("geoJsonOutput").textContent =
+                JSON.stringify(data, null, 2);
+
+              if (!data.length) {
+                alert("No location data found for given IPs.");
+                return;
+              }
+
+              data.forEach((item) => {
+                if (item.lat && item.lon) {
+                  const marker = L.marker([item.lat, item.lon])
+                    .addTo(map)
+                    .bindPopup(
+                      "<b>" +
+                        item.ip +
+                        "</b><br/>" +
+                        (item.city || "") +
+                        ", " +
+                        (item.region || "") +
+                        "<br/>" +
+                        (item.country || "") +
+                        "<br/>" +
+                        (item.org || ""),
+                    );
+                  markers.push(marker);
+                }
+              });
+
+              if (markers.length > 0) {
+                const group = new L.featureGroup(markers);
+                map.fitBounds(group.getBounds(), {
+                  padding: [50, 50],
+                  maxZoom: 6,
+                });
+              } else {
+                alert("No valid coordinates to display for these IPs.");
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+              document.getElementById("geoJsonOutput").textContent =
+                "Error: " + err.message;
+              alert("Error loading geolocation data.");
+            });
+        });
+    </script>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

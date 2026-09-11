@@ -1,0 +1,44 @@
+{
+    "success": true,
+    "case_id": "MT-20260911_112625_176433",
+    "analysis_time": "11-09-2026 11:26:25",
+    "original_filename": "demo_real_ip.eml",
+    "evidence_sha256": "5e8adcf5dfdfa8b8574d565ce292089104da4c990e8a1aa519dedaf80ee8cd3b",
+    "email_data": {
+        "from": "PayPal Security <security@paypa1-verify.com>",
+        "to": "victim@example.com",
+        "subject": "Urgent: Verify Your Account Now",
+        "date": "Thu, 10 Sep 2026 10:00:00 +0000",
+        "reply_to": "Not available",
+        "return_path": "Not available",
+        "message_id": "<abc123@paypa1-verify.com>",
+        "body_preview": "Dear Customer,\n\nYour account has been flagged for suspicious activity. Click the link below to verify your identity immediately or your account will be suspended.\n\nhttp://paypa1-verify-secure.com/login\n\nThank you,\nPayPal Security Team\n",
+        "urls": [
+            "http://paypa1-verify-secure.com/login"
+        ],
+        "ips_found": [
+            "8.8.8.8"
+        ],
+        "received_headers": [
+            "from mail.suspicious-domain.com (mail.suspicious-domain.com [8.8.8.8])\tby mx.example.com with ESMTP id abc123\tfor <victim@example.com>; Tue, 10 Sep 2026 10:00:00 +0000"
+        ],
+        "authentication_results": [],
+        "attachments": []
+    },
+    "risk_analysis": {
+        "risk_score": 70,
+        "threat_category": "Suspicious Email",
+        "confidence": "Medium",
+        "recommended_action": "Do not click links or open attachments. Verify sender independently.",
+        "reasons": [
+            "Multiple phishing/social-engineering keywords detected: urgent, immediately, verify, login",
+            "Sender domain 'paypa1-verify.com' closely resembles known brand 'paypal' (possible typosquatting)",
+            "1 URL(s) found in email content",
+            "Suspicious URL pattern detected: http://paypa1-verify-secure.com/login"
+        ]
+    },
+    "ips": [
+        "8.8.8.8"
+    ],
+    "report_url": "/report/MT-20260911_112625_176433"
+}

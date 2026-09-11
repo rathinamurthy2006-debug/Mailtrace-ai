@@ -1,0 +1,30 @@
+From: AICTE Student Support <support@aicte-student-verify.com>
+To: student@example.com
+Subject: URGENT: Scholarship Payment Verification Required
+Date: Wed, 02 Sep 2026 10:30:00 +0530
+Reply-To: verify-team@secure-account-update.com
+Return-Path: <support@aicte-student-verify.com>
+Message-ID: <phishing-demo-001@mailtrace.test>
+Received: from suspicious-mail-server.example (198.51.100.25)
+    by student-mail.example with SMTP;
+    Wed, 02 Sep 2026 10:30:00 +0530
+Authentication-Results: student-mail.example;
+    spf=fail smtp.mailfrom=aicte-student-verify.com;
+    dkim=fail;
+    dmarc=fail header.from=aicte-student-verify.com
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+
+Dear Student,
+
+Your scholarship payment has been put on hold.
+
+Verify your bank details immediately to avoid cancellation.
+Click here to update your account:
+
+http://aicte-student-verify.com/login/secure-account-update
+
+This request is urgent. Complete verification within 24 hours.
+
+Regards,
+AICTE Student Support

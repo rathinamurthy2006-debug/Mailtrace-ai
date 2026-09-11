@@ -1,0 +1,25 @@
+From: College Administration <admin@college-example.edu>
+To: student@example.com
+Subject: Semester Examination Timetable Published
+Date: Wed, 09 Sep 2026 12:30:00 +0530
+Reply-To: admin@college-example.edu
+Return-Path: <admin@college-example.edu>
+Message-ID: <legitimate-demo-001@mailtrace.test>
+Received: from mail.college-example.edu (203.0.113.20)
+    by student-mail.example with ESMTP;
+    Wed, 09 Sep 2026 12:30:00 +0530
+Authentication-Results: student-mail.example;
+    spf=pass smtp.mailfrom=college-example.edu;
+    dkim=pass header.d=college-example.edu;
+    dmarc=pass header.from=college-example.edu
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+
+Dear Student,
+
+The semester examination timetable has been published on the official college portal.
+
+Please check the academic notice board for the complete schedule.
+
+Regards,
+College Administration

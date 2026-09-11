@@ -1,0 +1,18 @@
+Received: from mail.suspicious-domain.com (mail.suspicious-domain.com [8.8.8.8])
+	by mx.example.com with ESMTP id abc123
+	for <victim@example.com>; Tue, 10 Sep 2026 10:00:00 +0000
+From: "PayPal Security" <security@paypa1-verify.com>
+To: victim@example.com
+Subject: Urgent: Verify Your Account Now
+Date: Tue, 10 Sep 2026 10:00:00 +0000
+Message-ID: <abc123@paypa1-verify.com>
+Content-Type: text/plain; charset="UTF-8"
+
+Dear Customer,
+
+Your account has been flagged for suspicious activity. Click the link below to verify your identity immediately or your account will be suspended.
+
+http://paypa1-verify-secure.com/login
+
+Thank you,
+PayPal Security Team
